@@ -1,10 +1,10 @@
 <?php
 namespace Apie\Faker\Fakers;
 
+use Apie\Core\RegexUtils;
 use Apie\Core\ValueObjects\Interfaces\HasRegexValueObjectInterface;
 use Apie\Core\ValueObjects\Interfaces\StringValueObjectInterface;
 use Apie\Faker\Interfaces\ApieClassFaker;
-use Apie\Core\RegexUtils;
 use Faker\Generator;
 use ReflectionClass;
 use RegRev\RegRev;

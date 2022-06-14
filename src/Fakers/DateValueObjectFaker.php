@@ -2,8 +2,6 @@
 namespace Apie\Faker\Fakers;
 
 use Apie\Core\ValueObjects\Interfaces\TimeRelatedValueObjectInterface;
-use Apie\DateValueObjects\Concerns\CanCreateInstanceFromDateTimeObject;
-use Apie\DateValueObjects\UnixTimestamp;
 use Apie\Faker\Interfaces\ApieClassFaker;
 use DateTime;
 use Faker\Generator;
