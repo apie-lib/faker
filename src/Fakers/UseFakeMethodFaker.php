@@ -6,8 +6,8 @@ use Apie\Core\Exceptions\InvalidTypeException;
 use Apie\Faker\Exceptions\MethodIsNotStaticException;
 use Apie\Faker\Interfaces\ApieClassFaker;
 use Faker\Generator;
-use ReflectionClass;
 use ReflectionAttribute;
+use ReflectionClass;
 
 /** @implements ApieClassFaker<object> */
 class UseFakeMethodFaker implements ApieClassFaker

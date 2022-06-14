@@ -1,14 +1,20 @@
 <?php
 namespace Apie\Tests\Faker;
 
-use Apie\CommonValueObjects\Ranges\DateTimeRange;
 use Apie\CommonValueObjects\Enums\Gender;
 use Apie\CommonValueObjects\Identifiers\KebabCaseSlug;
 use Apie\CommonValueObjects\Identifiers\PascalCaseSlug;
 use Apie\CommonValueObjects\Identifiers\Slug;
 use Apie\CommonValueObjects\Identifiers\Uuid;
+use Apie\CommonValueObjects\Identifiers\UuidV1;
+use Apie\CommonValueObjects\Identifiers\UuidV2;
+use Apie\CommonValueObjects\Identifiers\UuidV3;
+use Apie\CommonValueObjects\Identifiers\UuidV4;
+use Apie\CommonValueObjects\Identifiers\UuidV5;
+use Apie\CommonValueObjects\Identifiers\UuidV6;
 use Apie\CommonValueObjects\Names\FirstName;
 use Apie\CommonValueObjects\Names\LastName;
+use Apie\CommonValueObjects\Ranges\DateTimeRange;
 use Apie\CommonValueObjects\Texts\DatabaseText;
 use Apie\CommonValueObjects\Texts\NonEmptyString;
 use Apie\CommonValueObjects\Texts\SmallDatabaseText;
@@ -110,6 +116,12 @@ class ApieObjectFakerTest extends TestCase
         yield [PascalCaseSlug::class];
         yield [Slug::class];
         yield [Uuid::class];
+        yield [UuidV1::class];
+        yield [UuidV2::class];
+        yield [UuidV3::class];
+        yield [UuidV4::class];
+        yield [UuidV5::class];
+        yield [UuidV6::class];
         yield [NonEmptyString::class];
         yield [DatabaseText::class];
         yield [SmallDatabaseText::class];

@@ -2,7 +2,6 @@
 namespace Apie\Faker\Exceptions;
 
 use Apie\Core\Exceptions\ApieException;
-use ReflectionClass;
 use ReflectionMethod;
 
 class MethodIsNotStaticException extends ApieException

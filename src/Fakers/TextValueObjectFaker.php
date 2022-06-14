@@ -16,10 +16,10 @@ class TextValueObjectFaker implements ApieClassFaker
         return in_array(
             $class->name,
             [
-                 DatabaseText::class,
-                  SmallDatabaseText::class,
-                  NonEmptyString::class,
-                  ]
+                DatabaseText::class,
+                SmallDatabaseText::class,
+                NonEmptyString::class,
+            ]
         );
     }
 

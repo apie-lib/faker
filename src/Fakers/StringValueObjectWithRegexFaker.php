@@ -1,22 +1,23 @@
 <?php
 namespace Apie\Faker\Fakers;
 
-use Apie\Core\ValueObjects\IsStringWithRegexValueObject;
+use Apie\Core\ValueObjects\Interfaces\HasRegexValueObjectInterface;
+use Apie\Core\ValueObjects\Interfaces\StringValueObjectInterface;
 use Apie\Faker\Interfaces\ApieClassFaker;
-use Apie\Faker\Utils\RegexUtils;
+use Apie\Core\RegexUtils;
 use Faker\Generator;
 use ReflectionClass;
 use RegRev\RegRev;
 
-/** @implements ApieClassFaker<ValueObjectInterface&Stringable> */
+/** @implements ApieClassFaker<HasRegexValueObjectInterface> */
 class StringValueObjectWithRegexFaker implements ApieClassFaker
 {
     public function supports(ReflectionClass $class): bool
     {
-        return in_array(IsStringWithRegexValueObject::class, $class->getTraitNames());
+        return $class->implementsInterface(HasRegexValueObjectInterface::class);
     }
 
-    public function fakeFor(Generator $generator, ReflectionClass $class): object
+    public function fakeFor(Generator $generator, ReflectionClass $class): StringValueObjectInterface&HasRegexValueObjectInterface
     {
         $className = $class->name;
         $regularExpressionWithDelimiter = $className::getRegularExpression();
