@@ -20,6 +20,8 @@ use Apie\CommonValueObjects\Texts\NonEmptyString;
 use Apie\CommonValueObjects\Texts\SmallDatabaseText;
 use Apie\DateValueObjects\Time;
 use Apie\Faker\ApieObjectFaker;
+use Apie\Fixtures\Entities\UserWithAddress;
+use Apie\Fixtures\ValueObjects\Password;
 use DateTimeImmutable;
 use Faker\Factory;
 use Faker\Generator;
@@ -77,6 +79,7 @@ class ApieObjectFakerTest extends TestCase
     public function compositeValueObjectProvider(): iterable
     {
         yield [DateTimeRange::class];
+        yield [UserWithAddress::class];
     }
 
     /**
@@ -95,6 +98,24 @@ class ApieObjectFakerTest extends TestCase
     public function enumProvider()
     {
         yield [Gender::class];
+    }
+
+    /**
+     * @test
+     * @dataProvider passwordValueObjectsProvider
+     */
+    public function it_can_fake_a_password_value_object(string $classToTest)
+    {
+        $faker = $this->givenAFakerWithApieObjectFaker();
+        for ($i = 0; $i < 1000; $i++) {
+            $result = $faker->fakeClass($classToTest);
+            $this->assertStringMatchesFormat('%s', $result->toNative());
+        }
+    }
+
+    public function passwordValueObjectsProvider(): iterable
+    {
+        yield [Password::class];
     }
 
     /**

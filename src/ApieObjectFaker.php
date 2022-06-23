@@ -5,6 +5,7 @@ use Apie\Core\Exceptions\InvalidTypeException;
 use Apie\Faker\Exceptions\ClassCanNotBeFakedException;
 use Apie\Faker\Fakers\DateValueObjectFaker;
 use Apie\Faker\Fakers\EnumFaker;
+use Apie\Faker\Fakers\PasswordValueObjectFaker;
 use Apie\Faker\Fakers\StringValueObjectWithRegexFaker;
 use Apie\Faker\Fakers\TextValueObjectFaker;
 use Apie\Faker\Fakers\UseConstructorFaker;
@@ -15,6 +16,7 @@ use Faker\Generator;
 use Faker\Provider\Base;
 use ReflectionClass;
 use ReflectionIntersectionType;
+use ReflectionMethod;
 use ReflectionType;
 use ReflectionUnionType;
 
@@ -39,6 +41,7 @@ final class ApieObjectFaker extends Base
         return new self(
             $generator,
             new UseFakeMethodFaker(),
+            new PasswordValueObjectFaker(),
             new TextValueObjectFaker(),
             new UseDefaultGeneratorFaker(),
             new DateValueObjectFaker(),
@@ -64,6 +67,26 @@ final class ApieObjectFaker extends Base
         }
 
         throw new ClassCanNotBeFakedException($refl);
+    }
+
+    public function fakeArgumentsOfMethod(ReflectionMethod $method): array
+    {
+        $arguments = [];
+        foreach ($method->getParameters() as $parameter) {
+            $type = $parameter->getType();
+            if ($parameter->isVariadic()) {
+                $rand = $this->generator->rand(0, 4);
+                for ($i = 0; $i < $rand; $i++) {
+                    $arguments[] = $this->generator->fakeFromType($type);
+                }
+            } elseif ($parameter->allowsNull() && 1 === $this->generator->rand(0, 4)) {
+                $arguments[] = null;
+            } else {
+                $arguments[] = $this->generator->fakeFromType($type);
+            }
+        }
+
+        return $arguments;
     }
     
     public function fakeFromType(?ReflectionType $typehint): mixed

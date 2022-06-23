@@ -4,6 +4,7 @@ namespace Apie\Faker\Fakers;
 use Apie\Faker\Interfaces\ApieClassFaker;
 use Faker\Generator;
 use ReflectionClass;
+use ReflectionMethod;
 
 /** @implements ApieClassFaker<object> */
 class UseConstructorFaker implements ApieClassFaker
@@ -15,20 +16,18 @@ class UseConstructorFaker implements ApieClassFaker
     public function fakeFor(Generator $generator, ReflectionClass $class): object
     {
         $constructor = $class->getConstructor();
-        $arguments = [];
-        foreach ($constructor->getParameters() as $parameter) {
-            $type = $parameter->getType();
-            if ($parameter->isVariadic()) {
-                $rand = $generator->rand(0, 4);
-                for ($i = 0; $i < $rand; $i++) {
-                    $arguments[] = $generator->fakeFromType($type);
+        $arguments = $generator->fakeArgumentsOfMethod($constructor);
+        $object = $class->newInstance(...$arguments);
+        foreach ($class->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
+            if ($generator->randomElement([0, 1]) && preg_match('/^(set|with)([A-Z].*)$/', $method->name)) {
+                $arguments = $generator->fakeArgumentsOfMethod($method);
+                $result = $method->invoke($object, ...$arguments);
+                // in case object is immutable...
+                if (is_object($result) && $class->isInstance($result)) {
+                    $object = $result;
                 }
-            } elseif ($parameter->allowsNull() && 1 === $generator->rand(0, 4)) {
-                $arguments[] = null;
-            } else {
-                $arguments[] = $generator->fakeFromType($type);
             }
         }
-        return $class->newInstance(...$arguments);
+        return $object;
     }
 }
