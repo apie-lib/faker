@@ -28,6 +28,7 @@
   "require-dev": {
     "apie/common-value-objects": "self.version",
     "apie/date-value-objects": "self.version",
+    "apie/fixtures": "self.version",
     "phpunit/phpunit": "^9.5",
     "phpspec/prophecy-phpunit": "^2.0",
     "symfony/finder": "6.*"
