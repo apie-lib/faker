@@ -22,7 +22,7 @@
   "require": {
     "php": ">=8.1",
     "apie/core": "self.version",
-    "fakerphp/faker": "1.19",
+    "fakerphp/faker": "^1.19",
     "niklongstone/regex-reverse": "^0.4.0"
   },
   "require-dev": {
