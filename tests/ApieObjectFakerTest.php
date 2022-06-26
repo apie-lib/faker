@@ -2,9 +2,9 @@
 namespace Apie\Tests\Faker;
 
 use Apie\CommonValueObjects\Enums\Gender;
+use Apie\CommonValueObjects\Identifiers\Identifier;
 use Apie\CommonValueObjects\Identifiers\KebabCaseSlug;
 use Apie\CommonValueObjects\Identifiers\PascalCaseSlug;
-use Apie\CommonValueObjects\Identifiers\Slug;
 use Apie\CommonValueObjects\Identifiers\Uuid;
 use Apie\CommonValueObjects\Identifiers\UuidV1;
 use Apie\CommonValueObjects\Identifiers\UuidV2;
@@ -135,7 +135,7 @@ class ApieObjectFakerTest extends TestCase
     {
         yield [KebabCaseSlug::class];
         yield [PascalCaseSlug::class];
-        yield [Slug::class];
+        yield [Identifier::class];
         yield [Uuid::class];
         yield [UuidV1::class];
         yield [UuidV2::class];
