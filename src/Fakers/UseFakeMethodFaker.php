@@ -3,7 +3,7 @@ namespace Apie\Faker\Fakers;
 
 use Apie\Core\Attributes\FakeMethod;
 use Apie\Core\Exceptions\InvalidTypeException;
-use Apie\Faker\Exceptions\MethodIsNotStaticException;
+use Apie\Core\Exceptions\MethodIsNotStaticException;
 use Apie\Faker\Interfaces\ApieClassFaker;
 use Faker\Generator;
 use ReflectionAttribute;
