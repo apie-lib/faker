@@ -2,22 +2,6 @@
 namespace Apie\Tests\Faker;
 
 use Apie\CommonValueObjects\Enums\Gender;
-use Apie\CommonValueObjects\Identifiers\Identifier;
-use Apie\CommonValueObjects\Identifiers\KebabCaseSlug;
-use Apie\CommonValueObjects\Identifiers\PascalCaseSlug;
-use Apie\CommonValueObjects\Identifiers\Uuid;
-use Apie\CommonValueObjects\Identifiers\UuidV1;
-use Apie\CommonValueObjects\Identifiers\UuidV2;
-use Apie\CommonValueObjects\Identifiers\UuidV3;
-use Apie\CommonValueObjects\Identifiers\UuidV4;
-use Apie\CommonValueObjects\Identifiers\UuidV5;
-use Apie\CommonValueObjects\Identifiers\UuidV6;
-use Apie\CommonValueObjects\Names\FirstName;
-use Apie\CommonValueObjects\Names\LastName;
-use Apie\CommonValueObjects\Ranges\DateTimeRange;
-use Apie\CommonValueObjects\Texts\DatabaseText;
-use Apie\CommonValueObjects\Texts\NonEmptyString;
-use Apie\CommonValueObjects\Texts\SmallDatabaseText;
 use Apie\DateValueObjects\Time;
 use Apie\Faker\ApieObjectFaker;
 use Apie\Fixtures\Entities\Polymorphic\Animal;

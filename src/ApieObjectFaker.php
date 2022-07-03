@@ -6,7 +6,6 @@ use Apie\Faker\Exceptions\ClassCanNotBeFakedException;
 use Apie\Faker\Fakers\DateValueObjectFaker;
 use Apie\Faker\Fakers\EnumFaker;
 use Apie\Faker\Fakers\PasswordValueObjectFaker;
-use Apie\Faker\Fakers\PolymorphcEntityFaker;
 use Apie\Faker\Fakers\PolymorphicEntityFaker;
 use Apie\Faker\Fakers\StringValueObjectWithRegexFaker;
 use Apie\Faker\Fakers\TextValueObjectFaker;
@@ -105,6 +104,10 @@ final class ApieObjectFaker extends Base
         if ($type->getName() === Generator::class) {
             return $this->generator;
         }
-        return $this->fakeClass($type->getName());
+        return match ($type->getName()) {
+            'array' => [],
+            'mixed' => null,
+            default => $this->fakeClass($type->getName()),
+        };
     }
 }

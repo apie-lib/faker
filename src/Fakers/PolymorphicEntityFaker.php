@@ -1,8 +1,8 @@
 <?php
 namespace Apie\Faker\Fakers;
 
-use Apie\Core\Other\DiscriminatorMapping;
 use Apie\Core\Entities\PolymorphicEntityInterface;
+use Apie\Core\Other\DiscriminatorMapping;
 use Apie\Faker\Interfaces\ApieClassFaker;
 use Faker\Generator;
 use ReflectionClass;
