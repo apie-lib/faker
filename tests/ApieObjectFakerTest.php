@@ -20,7 +20,9 @@ use Apie\CommonValueObjects\Texts\NonEmptyString;
 use Apie\CommonValueObjects\Texts\SmallDatabaseText;
 use Apie\DateValueObjects\Time;
 use Apie\Faker\ApieObjectFaker;
+use Apie\Fixtures\Entities\Polymorphic\Animal;
 use Apie\Fixtures\Entities\UserWithAddress;
+use Apie\Fixtures\Entities\UserWithAutoincrementKey;
 use Apie\Fixtures\ValueObjects\Password;
 use DateTimeImmutable;
 use Faker\Factory;
@@ -78,8 +80,9 @@ class ApieObjectFakerTest extends TestCase
 
     public function compositeValueObjectProvider(): iterable
     {
-        yield [DateTimeRange::class];
+        yield [UserWithAutoincrementKey::class];
         yield [UserWithAddress::class];
+        yield [Animal::class];
     }
 
     /**
@@ -116,37 +119,5 @@ class ApieObjectFakerTest extends TestCase
     public function passwordValueObjectsProvider(): iterable
     {
         yield [Password::class];
-    }
-
-    /**
-     * @test
-     * @dataProvider stringValueObjectsProvider
-     */
-    public function it_can_fake_a_string_with_regex_value_object(string $classToTest)
-    {
-        $faker = $this->givenAFakerWithApieObjectFaker();
-        for ($i = 0; $i < 1000; $i++) {
-            $result = $faker->fakeClass($classToTest);
-            $this->assertStringMatchesFormat('%s', $result->toNative());
-        }
-    }
-
-    public function stringValueObjectsProvider(): iterable
-    {
-        yield [KebabCaseSlug::class];
-        yield [PascalCaseSlug::class];
-        yield [Identifier::class];
-        yield [Uuid::class];
-        yield [UuidV1::class];
-        yield [UuidV2::class];
-        yield [UuidV3::class];
-        yield [UuidV4::class];
-        yield [UuidV5::class];
-        yield [UuidV6::class];
-        yield [NonEmptyString::class];
-        yield [DatabaseText::class];
-        yield [SmallDatabaseText::class];
-        yield [FirstName::class];
-        yield [LastName::class];
     }
 }

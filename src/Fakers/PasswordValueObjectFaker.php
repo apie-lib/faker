@@ -25,23 +25,24 @@ class PasswordValueObjectFaker implements ApieClassFaker
         $minLowercase = $className::getMinLowercase();
         $minUppercase = $className::getMinUppercase();
         $specialCharacters = str_split($className::getAllowedSpecialCharacters());
-        $generatedPassword = implode('', $generator->randomElements($specialCharacters, $minSpecialCharacters));
+        $generatedPassword = $generator->randomElements($specialCharacters, $minSpecialCharacters);
         for ($i = 0; $i < $minDigits; $i++) {
-            $generatedPassword .= $generator->randomDigit();
+            $generatedPassword[] = $generator->randomDigit();
         }
         for ($i = 0; $i < $minLowercase; $i++) {
-            $generatedPassword .= $generator->randomElement(['a', 'b', 'c', 'd', 'e', 'f']);
+            $generatedPassword[] = $generator->randomElement(['a', 'b', 'c', 'd', 'e', 'f']);
         }
         for ($i = 0; $i < $minUppercase; $i++) {
-            $generatedPassword .= $generator->randomElement(['A', 'B', 'C', 'D', 'E', 'F']);
+            $generatedPassword[] = $generator->randomElement(['A', 'B', 'C', 'D', 'E', 'F']);
         }
-        for ($i = strlen($generatedPassword); $i < $minLength; $i++) {
-            $generatedPassword .= $generator->randomElement(['g', 'G', 'h', 'H']);
+        for ($i = count($generatedPassword); $i < $minLength; $i++) {
+            $generatedPassword[] = $generator->randomElement(['g', 'G', 'h', 'H']);
         }
-        if (strlen($generatedPassword) > $maxLength) {
-            $generatedPassword = substr(0, $maxLength);
+        if (count($generatedPassword) > $maxLength) {
+            $generatedPassword = array_slice($generatedPassword, 0, $maxLength);
         }
+        shuffle($generatedPassword);
 
-        return $className::fromNative($generatedPassword);
+        return $className::fromNative(implode('', $generatedPassword));
     }
 }

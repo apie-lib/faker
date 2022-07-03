@@ -6,6 +6,8 @@ use Apie\Faker\Exceptions\ClassCanNotBeFakedException;
 use Apie\Faker\Fakers\DateValueObjectFaker;
 use Apie\Faker\Fakers\EnumFaker;
 use Apie\Faker\Fakers\PasswordValueObjectFaker;
+use Apie\Faker\Fakers\PolymorphcEntityFaker;
+use Apie\Faker\Fakers\PolymorphicEntityFaker;
 use Apie\Faker\Fakers\StringValueObjectWithRegexFaker;
 use Apie\Faker\Fakers\TextValueObjectFaker;
 use Apie\Faker\Fakers\UseConstructorFaker;
@@ -41,6 +43,7 @@ final class ApieObjectFaker extends Base
         return new self(
             $generator,
             new UseFakeMethodFaker(),
+            new PolymorphicEntityFaker(),
             new PasswordValueObjectFaker(),
             new TextValueObjectFaker(),
             new UseDefaultGeneratorFaker(),
@@ -79,7 +82,7 @@ final class ApieObjectFaker extends Base
                 for ($i = 0; $i < $rand; $i++) {
                     $arguments[] = $this->generator->fakeFromType($type);
                 }
-            } elseif ($parameter->allowsNull() && 1 === $this->generator->rand(0, 4)) {
+            } elseif ($parameter->allowsNull() && 1 === $this->generator->numberBetween(0, 4)) {
                 $arguments[] = null;
             } else {
                 $arguments[] = $this->generator->fakeFromType($type);
