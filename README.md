@@ -6,7 +6,7 @@
 
 
 
- [![Latest Stable Version](http://poser.pugx.org/apie/faker/v)](https://packagist.org/packages/apie/faker) [![Total Downloads](http://poser.pugx.org/apie/faker/downloads)](https://packagist.org/packages/apie/faker) [![Latest Unstable Version](http://poser.pugx.org/apie/faker/v/unstable)](https://packagist.org/packages/apie/faker) [![License](http://poser.pugx.org/apie/faker/license)](https://packagist.org/packages/apie/faker) [![PHP Version Require](http://poser.pugx.org/apie/faker/require/php)](https://packagist.org/packages/apie/faker) [![Code coverage](https://raw.githubusercontent.com/apie-lib/faker/main/coverage_badge.svg)](https://apie-lib.github.io/coverage/faker/index.html) 
+ [![Latest Stable Version](http://poser.pugx.org/apie/faker/v)](https://packagist.org/packages/apie/faker) [![Total Downloads](http://poser.pugx.org/apie/faker/downloads)](https://packagist.org/packages/apie/faker) [![Latest Unstable Version](http://poser.pugx.org/apie/faker/v/unstable)](https://packagist.org/packages/apie/faker) [![License](http://poser.pugx.org/apie/faker/license)](https://packagist.org/packages/apie/faker) [![PHP Version Require](http://poser.pugx.org/apie/faker/require/php)](https://packagist.org/packages/apie/faker) [![Code coverage](https://raw.githubusercontent.com/apie-lib/faker/main/coverage_badge.svg)](https://apie-lib.github.io/coverage/faker/index.html) [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=J4CAFUAW7VTAY) 
 
 [![PHP Composer](https://github.com/apie-lib/faker/actions/workflows/php.yml/badge.svg?event=push)](https://github.com/apie-lib/faker/actions/workflows/php.yml)
 
