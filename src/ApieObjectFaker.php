@@ -106,6 +106,7 @@ final class ApieObjectFaker extends Base
         }
         return match ($type->getName()) {
             'array' => [],
+            'int' => $this->generator->random_int(PHP_INT_MIN, PHP_INT_MAX),
             'mixed' => null,
             default => $this->fakeClass($type->getName()),
         };
