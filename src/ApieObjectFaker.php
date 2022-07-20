@@ -8,7 +8,6 @@ use Apie\Faker\Fakers\EnumFaker;
 use Apie\Faker\Fakers\PasswordValueObjectFaker;
 use Apie\Faker\Fakers\PolymorphicEntityFaker;
 use Apie\Faker\Fakers\StringValueObjectWithRegexFaker;
-use Apie\Faker\Fakers\TextValueObjectFaker;
 use Apie\Faker\Fakers\UseConstructorFaker;
 use Apie\Faker\Fakers\UseDefaultGeneratorFaker;
 use Apie\Faker\Fakers\UseFakeMethodFaker;
@@ -44,7 +43,6 @@ final class ApieObjectFaker extends Base
             new UseFakeMethodFaker(),
             new PolymorphicEntityFaker(),
             new PasswordValueObjectFaker(),
-            new TextValueObjectFaker(),
             new UseDefaultGeneratorFaker(),
             new DateValueObjectFaker(),
             new StringValueObjectWithRegexFaker(),
