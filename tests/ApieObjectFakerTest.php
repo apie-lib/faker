@@ -1,12 +1,12 @@
 <?php
 namespace Apie\Tests\Faker;
 
-use Apie\CommonValueObjects\Enums\Gender;
 use Apie\DateValueObjects\Time;
 use Apie\Faker\ApieObjectFaker;
 use Apie\Fixtures\Entities\Polymorphic\Animal;
 use Apie\Fixtures\Entities\UserWithAddress;
 use Apie\Fixtures\Entities\UserWithAutoincrementKey;
+use Apie\Fixtures\Enums\Gender;
 use Apie\Fixtures\ValueObjects\Password;
 use DateTimeImmutable;
 use Faker\Factory;
