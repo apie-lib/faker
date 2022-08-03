@@ -12,9 +12,6 @@ use ReflectionClass;
  */
 class PolymorphicEntityFaker implements ApieClassFaker
 {
-    /**
-     * @param ReflectionClass<object>
-     */
     public function supports(ReflectionClass $class): bool
     {
         if (!$class->implementsInterface(PolymorphicEntityInterface::class)) {
@@ -26,7 +23,6 @@ class PolymorphicEntityFaker implements ApieClassFaker
 
     public function fakeFor(Generator $generator, ReflectionClass $class): PolymorphicEntityInterface
     {
-        $className = $class;
         /** @var DiscriminatorMapping */
         $mapping = $class->getMethod('getDiscriminatorMapping')->invoke(null);
         $randomConfig = $generator->randomElement($mapping->getConfigs());

@@ -3,7 +3,6 @@ namespace Apie\Faker\Fakers;
 
 use Apie\Core\RegexUtils;
 use Apie\Core\ValueObjects\Interfaces\HasRegexValueObjectInterface;
-use Apie\Core\ValueObjects\Interfaces\StringValueObjectInterface;
 use Apie\Faker\Interfaces\ApieClassFaker;
 use Faker\Generator;
 use ReflectionClass;
@@ -17,7 +16,7 @@ class StringValueObjectWithRegexFaker implements ApieClassFaker
         return $class->implementsInterface(HasRegexValueObjectInterface::class);
     }
 
-    public function fakeFor(Generator $generator, ReflectionClass $class): StringValueObjectInterface&HasRegexValueObjectInterface
+    public function fakeFor(Generator $generator, ReflectionClass $class): HasRegexValueObjectInterface
     {
         $className = $class->name;
         $regularExpressionWithDelimiter = $className::getRegularExpression();

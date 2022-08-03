@@ -10,11 +10,11 @@ use ReflectionClass;
 interface ApieClassFaker
 {
     /**
-     * @param ReflectionClass<object>
+     * @param ReflectionClass<object> $class
      */
     public function supports(ReflectionClass $class): bool;
     /**
-     * @param ReflectionClass<T>
+     * @param ReflectionClass<T> $class
      * @return T
      */
     public function fakeFor(Generator $generator, ReflectionClass $class): object;

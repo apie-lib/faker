@@ -25,16 +25,22 @@ use ReflectionUnionType;
 final class ApieObjectFaker extends Base
 {
     /**
-     * @ApieClassFaker[]
+     * @var array<ApieClassFaker<object>> $fakers
      */
     private array $fakers;
 
+    /**
+     * @param ApieClassFaker<object> $fakers
+     */
     public function __construct(Generator $generator, ApieClassFaker... $fakers)
     {
         $this->fakers = $fakers;
         parent::__construct($generator);
     }
 
+    /**
+     * @param ApieClassFaker<object> $additional
+     */
     public static function createWithDefaultFakers(Generator $generator, ApieClassFaker... $additional): self
     {
         return new self(
@@ -52,7 +58,7 @@ final class ApieObjectFaker extends Base
 
     /**
      * @template T of object
-     * @param class-string<T>
+     * @param class-string<T> $className
      * @return T
      */
     public function fakeClass(string $className): object
@@ -67,6 +73,9 @@ final class ApieObjectFaker extends Base
         throw new ClassCanNotBeFakedException($refl);
     }
 
+    /**
+     * @return array<int, mixed>
+     */
     public function fakeArgumentsOfMethod(ReflectionMethod $method): array
     {
         $arguments = [];
