@@ -2,15 +2,13 @@
 namespace Apie\Tests\Faker;
 
 use Apie\DateValueObjects\Time;
-use Apie\Faker\ApieObjectFaker;
 use Apie\Fixtures\Entities\Polymorphic\Animal;
 use Apie\Fixtures\Entities\UserWithAddress;
 use Apie\Fixtures\Entities\UserWithAutoincrementKey;
 use Apie\Fixtures\Enums\Gender;
 use Apie\Fixtures\ValueObjects\Password;
+use Apie\Tests\Faker\Concerns\ItCreatesAFaker;
 use DateTimeImmutable;
-use Faker\Factory;
-use Faker\Generator;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use Symfony\Component\Finder\Finder;
@@ -18,12 +16,7 @@ use UnitEnum;
 
 class ApieObjectFakerTest extends TestCase
 {
-    private function givenAFakerWithApieObjectFaker(): Generator
-    {
-        $faker = Factory::create();
-        $faker->addProvider(ApieObjectFaker::createWithDefaultFakers($faker));
-        return $faker;
-    }
+    use ItCreatesAFaker;
 
     /**
      * @test
