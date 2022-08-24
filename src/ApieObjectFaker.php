@@ -82,7 +82,7 @@ final class ApieObjectFaker extends Base
         foreach ($method->getParameters() as $parameter) {
             $type = $parameter->getType();
             if ($parameter->isVariadic()) {
-                $rand = $this->generator->rand(0, 4);
+                $rand = $this->generator->numberBetween(0, 4);
                 for ($i = 0; $i < $rand; $i++) {
                     $arguments[] = $this->generator->fakeFromType($type);
                 }
