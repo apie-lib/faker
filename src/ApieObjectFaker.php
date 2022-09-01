@@ -5,6 +5,7 @@ use Apie\Core\Exceptions\InvalidTypeException;
 use Apie\Faker\Exceptions\ClassCanNotBeFakedException;
 use Apie\Faker\Fakers\DateValueObjectFaker;
 use Apie\Faker\Fakers\EnumFaker;
+use Apie\Faker\Fakers\ItemListFaker;
 use Apie\Faker\Fakers\PasswordValueObjectFaker;
 use Apie\Faker\Fakers\PolymorphicEntityFaker;
 use Apie\Faker\Fakers\StringValueObjectWithRegexFaker;
@@ -47,6 +48,7 @@ final class ApieObjectFaker extends Base
             $generator,
             new UseFakeMethodFaker(),
             new PolymorphicEntityFaker(),
+            new ItemListFaker(),
             new PasswordValueObjectFaker(),
             new DateValueObjectFaker(),
             new StringValueObjectWithRegexFaker(),
@@ -114,6 +116,7 @@ final class ApieObjectFaker extends Base
             'null' => null,
             'bool' => $this->generator->randomElement([true, false]),
             'float' => $this->generator->randomFloat(),
+            'string' => $this->generator->randomAscii(),
             'int' => $this->generator->numberBetween(PHP_INT_MIN, PHP_INT_MAX),
             'mixed' => null,
             default => $this->fakeClass($type->getName()),
