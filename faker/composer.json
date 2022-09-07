@@ -1,0 +1,39 @@
+{
+  "name": "apie/faker",
+  "description": "Composer package of the apie library: faker",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Pieter Jordaan",
+      "email": "pieter_jordaan@hotmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Apie\\Faker\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Apie\\Tests\\Faker\\": "tests/"
+    }
+  },
+  "require": {
+    "php": ">=8.1",
+    "apie/core": "self.version",
+    "fakerphp/faker": "^1.19",
+    "niklongstone/regex-reverse": "^0.4.0"
+  },
+  "require-dev": {
+    "apie/common-value-objects": "self.version",
+    "apie/date-value-objects": "self.version",
+    "apie/fixtures": "self.version",
+    "apie/text-value-objects": "self.version",
+    "phpunit/phpunit": "^9.5",
+    "phpspec/prophecy-phpunit": "^2.0",
+    "symfony/finder": "6.*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
