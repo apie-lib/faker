@@ -7,7 +7,7 @@ use Apie\Faker\Interfaces\ApieClassFaker;
 use Faker\Generator;
 use ReflectionClass;
 
-/** @implements ApieClassFaker<ValueObjectInterface&IsPasswordValueObject> */
+/** @implements ApieClassFaker<ValueObjectInterface> */
 class PasswordValueObjectFaker implements ApieClassFaker
 {
     public function supports(ReflectionClass $class): bool

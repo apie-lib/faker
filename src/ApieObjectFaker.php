@@ -2,7 +2,9 @@
 namespace Apie\Faker;
 
 use Apie\Core\Exceptions\InvalidTypeException;
+use Apie\Core\Identifiers\IdentifierInterface;
 use Apie\Faker\Exceptions\ClassCanNotBeFakedException;
+use Apie\Faker\Fakers\CheckBaseClassFaker;
 use Apie\Faker\Fakers\DateValueObjectFaker;
 use Apie\Faker\Fakers\EnumFaker;
 use Apie\Faker\Fakers\ItemListFaker;
@@ -47,6 +49,7 @@ final class ApieObjectFaker extends Base
         return new self(
             $generator,
             new UseFakeMethodFaker(),
+            new CheckBaseClassFaker(new ReflectionClass(IdentifierInterface::class)),
             new PolymorphicEntityFaker(),
             new ItemListFaker(),
             new PasswordValueObjectFaker(),
