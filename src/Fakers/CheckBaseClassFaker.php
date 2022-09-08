@@ -35,8 +35,9 @@ class CheckBaseClassFaker implements ApieClassFaker
             return (bool) $this->cached[$class->name];
         }
         if ($class->{$this->method}($this->baseClass)) {
+            $parent = $class;
             do {
-                $parent = $class->getParentClass();
+                $parent = $parent->getParentClass();
                 if ($parent->getAttributes(FakeMethod::class)) {
                     $this->cached[$class->name] = $parent->getAttributes(FakeMethod::class);
                     return true;
