@@ -5,6 +5,7 @@ use Apie\Faker\Interfaces\ApieClassFaker;
 use Faker\Generator;
 use ReflectionClass;
 use ReflectionMethod;
+use ReflectionProperty;
 
 /** @implements ApieClassFaker<object> */
 class UseConstructorFaker implements ApieClassFaker
@@ -27,6 +28,11 @@ class UseConstructorFaker implements ApieClassFaker
                 if (is_object($result) && $class->isInstance($result)) {
                     $object = $result;
                 }
+            }
+        }
+        foreach ($class->getProperties(ReflectionProperty::IS_PUBLIC) as $property) {
+            if (!$property->isReadOnly() || !$property->isInitialized($object)) {
+                $object->{$property->name} = $generator->fakeFromType($property->getType());
             }
         }
         return $object;
