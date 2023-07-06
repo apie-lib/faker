@@ -1,6 +1,6 @@
 services:
   Faker\Generator:
-    factory: Apie\ApieBundle\Wrappers\GeneralServiceFactory::createFaker
+    factory: Apie\Common\Wrappers\GeneralServiceFactory::createFaker
     arguments:
       - !tagged apie.faker
   

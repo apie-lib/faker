@@ -19,7 +19,7 @@ class FakerServiceProvider extends ServiceProvider
             \Faker\Generator::class,
             function ($app) {
                 return call_user_func(
-                    'Apie\\ApieBundle\\Wrappers\\GeneralServiceFactory::createFaker',
+                    'Apie\\Common\\Wrappers\\GeneralServiceFactory::createFaker',
                     $this->getTaggedServicesIterator('apie.faker')
                 );
                 
@@ -33,8 +33,15 @@ class FakerServiceProvider extends ServiceProvider
                 );
             }
         );
+        \Apie\ServiceProviderGenerator\TagMap::register(
+            $this->app,
+            \Apie\Faker\Datalayers\FakerDatalayer::class,
+            array(
+              0 => 'apie.datalayer',
+            )
+        );
         $this->app->tag([\Apie\Faker\Datalayers\FakerDatalayer::class], 'apie.datalayer');
-        $this->app->bind(\Faker\Generator::class, 'apie.faker');
+        $this->app->bind('apie.faker', \Faker\Generator::class);
         
         
     }
