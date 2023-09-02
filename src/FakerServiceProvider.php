@@ -28,7 +28,8 @@ class FakerServiceProvider extends ServiceProvider
             \Apie\Faker\Datalayers\FakerDatalayer::class,
             function ($app) {
                 return new \Apie\Faker\Datalayers\FakerDatalayer(
-                    $app->make(\Faker\Generator::class)
+                    $app->make(\Faker\Generator::class),
+                    $app->make(\Apie\Core\Datalayers\Search\LazyLoadedListFilterer::class)
                 );
             }
         );

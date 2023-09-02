@@ -7,6 +7,7 @@ services:
   Apie\Faker\Datalayers\FakerDatalayer:
     arguments:
       - '@Faker\Generator'
+      - '@Apie\Core\Datalayers\Search\LazyLoadedListFilterer'
     tags:
       - 'apie.datalayer'
 
