@@ -8,6 +8,7 @@ use ReflectionClass;
 
 /**
  * @template T of EntityInterface
+ * @implements Iterator<int, T>
  */
 class FakeIterator implements Iterator
 {

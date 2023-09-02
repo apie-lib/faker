@@ -1,18 +1,27 @@
 <?php
 namespace Apie\Faker\Datalayers;
 
+use Apie\Core\Attributes\FakeCount;
 use Apie\Core\BoundedContext\BoundedContextId;
 use Apie\Core\Datalayers\Concerns\CreatePaginatedResultRuntime;
 use Apie\Core\Datalayers\Lists\EntityListInterface;
 use Apie\Core\Datalayers\Search\LazyLoadedListFilterer;
+use Apie\Core\Entities\EntityInterface;
 use Faker\Generator;
 use Iterator;
 use ReflectionClass;
 
+/**
+ * @template T of EntityInterface
+ * @implements EntityListInterface<T>
+ */
 final class FakeEntityList implements EntityListInterface
 {
     use CreatePaginatedResultRuntime;
 
+    /**
+     * @param ReflectionClass<T> $class
+     */
     public function __construct(
         private readonly ReflectionClass $class,
         private readonly BoundedContextId $boundedContextId,
