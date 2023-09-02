@@ -4,8 +4,8 @@ namespace Apie\Faker\Datalayers;
 use Apie\Core\BoundedContext\BoundedContext;
 use Apie\Core\BoundedContext\BoundedContextId;
 use Apie\Core\Datalayers\BoundedContextAwareApieDatalayer;
-use Apie\Core\Datalayers\Lists\LazyLoadedList;
-use Apie\Core\Datalayers\ValueObjects\LazyLoadedListIdentifier;
+use Apie\Core\Datalayers\Lists\EntityListInterface;
+use Apie\Core\Datalayers\Search\LazyLoadedListFilterer;
 use Apie\Core\Entities\EntityInterface;
 use Apie\Core\Identifiers\AutoIncrementInteger;
 use Apie\Core\Identifiers\IdentifierInterface;
@@ -15,21 +15,17 @@ use ReflectionClass;
 
 class FakerDatalayer implements BoundedContextAwareApieDatalayer
 {
-    public function __construct(private readonly Generator $faker)
+    public function __construct(private readonly Generator $faker, private readonly LazyLoadedListFilterer $filterer)
     {
     }
 
-    public function all(ReflectionClass $class, ?BoundedContext $boundedContext = null): LazyLoadedList
+    public function all(ReflectionClass $class, ?BoundedContext $boundedContext = null): EntityListInterface
     {
-        $count = new CountFakeData($class);
-        return new LazyLoadedList(
-            LazyLoadedListIdentifier::createFrom(
-                $boundedContext ? $boundedContext->getId() : new BoundedContextId('unknown'),
-                $class
-            ),
-            new ProvideSingleFakeData($class, $this->faker),
-            new ProvideMultipleFakeData($class, $this->faker, $count),
-            $count
+        return new FakeEntityList(
+            $class,
+            $boundedContext ? $boundedContext->getId() : new BoundedContextId('unknown'),
+            $this->filterer,
+            $this->faker
         );
     }
 
