@@ -36,7 +36,7 @@ class FakerServiceProvider extends ServiceProvider
         \Apie\ServiceProviderGenerator\TagMap::register(
             $this->app,
             \Apie\Faker\Datalayers\FakerDatalayer::class,
-            array(
+            array (
               0 => 'apie.datalayer',
             )
         );
