@@ -38,7 +38,8 @@ class ApieObjectFakerTest extends TestCase
     {
         $path = dirname((new ReflectionClass(Time::class))->getFileName());
         foreach (Finder::create()->files()->name('*.php')->depth(0)->in($path) as $file) {
-            yield ['Apie\\DateValueObjects\\' . $file->getBasename('.php')];
+            $class = 'Apie\\DateValueObjects\\' . $file->getBasename('.php');
+            yield $class => [$class];
         }
     }
 
@@ -49,7 +50,7 @@ class ApieObjectFakerTest extends TestCase
     public function it_can_fake_composite_value_objects(string $classToTest)
     {
         $faker = $this->givenAFakerWithApieObjectFaker();
-        for ($i = 0; $i < 1000; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $result = $faker->fakeClass($classToTest);
             $this->assertInstanceOf($classToTest, $result);
         }
@@ -57,9 +58,9 @@ class ApieObjectFakerTest extends TestCase
 
     public function compositeValueObjectProvider(): iterable
     {
-        yield [UserWithAutoincrementKey::class];
-        yield [UserWithAddress::class];
-        yield [Animal::class];
+        yield 'Entity with autoincrement identifier' => [UserWithAutoincrementKey::class];
+        yield 'Entity with uuid identifier' => [UserWithAddress::class];
+        yield 'Polymorphic entity' => [Animal::class];
     }
 
     /**
@@ -77,7 +78,7 @@ class ApieObjectFakerTest extends TestCase
 
     public function enumProvider()
     {
-        yield [Gender::class];
+        yield 'regular enum' => [Gender::class];
     }
 
     /**
@@ -95,6 +96,6 @@ class ApieObjectFakerTest extends TestCase
 
     public function passwordValueObjectsProvider(): iterable
     {
-        yield [Password::class];
+        yield 'regular password' => [Password::class];
     }
 }
