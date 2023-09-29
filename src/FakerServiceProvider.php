@@ -25,6 +25,23 @@ class FakerServiceProvider extends ServiceProvider
             }
         );
         $this->app->singleton(
+            \Apie\Faker\Command\ApieSeedCommand::class,
+            function ($app) {
+                return new \Apie\Faker\Command\ApieSeedCommand(
+                    $app->make(\Apie\Core\BoundedContext\BoundedContextHashmap::class),
+                    $app->make('apie')
+                );
+            }
+        );
+        \Apie\ServiceProviderGenerator\TagMap::register(
+            $this->app,
+            \Apie\Faker\Command\ApieSeedCommand::class,
+            array(
+              0 => 'console.command',
+            )
+        );
+        $this->app->tag([\Apie\Faker\Command\ApieSeedCommand::class], 'console.command');
+        $this->app->singleton(
             \Apie\Faker\Datalayers\FakerDatalayer::class,
             function ($app) {
                 return new \Apie\Faker\Datalayers\FakerDatalayer(

@@ -4,6 +4,13 @@ services:
     arguments:
       - !tagged apie.faker
   
+  Apie\Faker\Command\ApieSeedCommand:
+    arguments:
+      - '@Apie\Core\BoundedContext\BoundedContextHashmap'
+      - '@apie'
+    tags:
+      - 'console.command'
+
   Apie\Faker\Datalayers\FakerDatalayer:
     arguments:
       - '@Faker\Generator'
