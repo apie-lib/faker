@@ -9,8 +9,14 @@ use Apie\Faker\Interfaces\ApieClassFaker;
 use Faker\Generator;
 use ReflectionClass;
 
+/**
+ * @implements ApieClassFaker<IdentifierInterface>
+ */
 final class ApieResourceSeeder implements ApieClassFaker
 {
+    /**
+     * @var array<int, EntityInterface|null> $createdResources
+     */
     private array $createdResources = [];
 
     public function __construct(
@@ -32,6 +38,9 @@ final class ApieResourceSeeder implements ApieClassFaker
         return $intendedClass->name === $this->contextAndClass->resourceClass->name;
     }
 
+    /**
+     * @return ReflectionClass<EntityInterface>
+     */
     public function getResourceClass(): ReflectionClass
     {
         return $this->contextAndClass->resourceClass;
@@ -54,7 +63,7 @@ final class ApieResourceSeeder implements ApieClassFaker
         return $this->createdResources[$index];
     }
     /**
-     * @template T of EntityInterface
+     * @template T of IdentifierInterface<EntityInterface>
      * @param ReflectionClass<T> $class
      * @return T
      */
