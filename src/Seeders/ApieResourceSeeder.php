@@ -7,6 +7,7 @@ use Apie\Core\Entities\EntityInterface;
 use Apie\Core\Identifiers\IdentifierInterface;
 use Apie\Faker\Interfaces\ApieClassFaker;
 use Faker\Generator;
+use LogicException;
 use ReflectionClass;
 
 /**
@@ -18,6 +19,11 @@ final class ApieResourceSeeder implements ApieClassFaker
      * @var array<int, EntityInterface|null> $createdResources
      */
     private array $createdResources = [];
+
+    /**
+     * @var array<string, bool> $idsCreated;
+     */
+    private array $idsCreated = [];
 
     public function __construct(
         private readonly BoundedContextEntityTuple $contextAndClass,
@@ -57,7 +63,17 @@ final class ApieResourceSeeder implements ApieClassFaker
             return null;
         }
         if (!isset($this->createdResources[$index])) {
-            $this->createdResources[$index] = $generator->fakeClass($this->contextAndClass->resourceClass->name);
+            $retries = 0;
+            do {
+                $fakedResource = $generator->fakeClass($this->contextAndClass->resourceClass->name);
+                $id = $fakedResource->getId()->toNative();
+                $retries++;
+            } while (isset($this->idsCreated[$id]) && $retries < 1000);
+            if (isset($this->idsCreated[$id])) {
+                throw new LogicException('I tried to create a unique resource, but it failed for 1000 times!');
+            }
+            $this->idsCreated[$id] = true;
+            $this->createdResources[$index] = $fakedResource;
         }
 
         return $this->createdResources[$index];
