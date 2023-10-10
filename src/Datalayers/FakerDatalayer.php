@@ -55,4 +55,8 @@ class FakerDatalayer implements ApieDatalayerWithFilters, BoundedContextAwareApi
     {
         return $entity;
     }
+
+    public function removeExisting(EntityInterface $entity, ?BoundedContext $boundedContext = null): void
+    {
+    }
 }
