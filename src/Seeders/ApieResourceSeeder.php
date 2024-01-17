@@ -68,9 +68,14 @@ final class ApieResourceSeeder implements ApieClassFaker
                 $fakedResource = $generator->fakeClass($this->contextAndClass->resourceClass->name);
                 $id = $fakedResource->getId()->toNative();
                 $retries++;
-            } while (isset($this->idsCreated[$id]) && $retries < 1000);
-            if (isset($this->idsCreated[$id])) {
-                throw new LogicException('I tried to create a unique resource, but it failed for 1000 times!');
+            } while ($id !== null && isset($this->idsCreated[$id]) && $retries < 1000);
+            if ($id !== null && isset($this->idsCreated[$id])) {
+                throw new LogicException(
+                    sprintf(
+                        'I tried to create a unique resource, but it failed for 1000 times on class "%s"!',
+                        $this->contextAndClass->resourceClass->name
+                    )
+                );
             }
             $this->idsCreated[$id] = true;
             $this->createdResources[$index] = $fakedResource;

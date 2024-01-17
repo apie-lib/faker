@@ -50,7 +50,7 @@ class ApieSeedCommand extends Command
             do {
                 $resource = $seeder->getResource($generator, $index);
                 if ($resource) {
-                    $this->apieFacade->persistNew($resource, $seeder->getBoundedContextId());
+                    $this->apieFacade->persistNew($resource, $seeder->getBoundedContextId());                  
                 }
                 $index++;
             } while ($resource);
