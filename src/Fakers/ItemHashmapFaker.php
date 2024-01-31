@@ -2,17 +2,17 @@
 
 namespace Apie\Faker\Fakers;
 
-use Apie\Core\Lists\ItemList;
+use Apie\Core\Lists\ItemHashmap;
 use Apie\Faker\Interfaces\ApieClassFaker;
 use Faker\Generator;
 use ReflectionClass;
 
-/** @implements ApieClassFaker<ItemList> */
-class ItemListFaker implements ApieClassFaker
+/** @implements ApieClassFaker<ItemHashmap> */
+class ItemHashmapFaker implements ApieClassFaker
 {
     public function supports(ReflectionClass $class): bool
     {
-        return $class->isSubclassOf(ItemList::class) || $class->name === ItemList::class;
+        return $class->isSubclassOf(ItemHashmap::class) || $class->name === ItemHashmap::class;
     }
 
     public function fakeFor(Generator $generator, ReflectionClass $class): object
@@ -21,7 +21,7 @@ class ItemListFaker implements ApieClassFaker
         $itemCount = $generator->numberBetween(1, 4);
         $arguments = [];
         for ($i = 0; $i < $itemCount; $i++) {
-            $arguments[] = $generator->fakeFromType($returnType);
+            $arguments[$generator->word()] = $generator->fakeFromType($returnType);
         }
         return $class->newInstance($arguments);
     }

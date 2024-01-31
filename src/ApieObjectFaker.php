@@ -7,6 +7,7 @@ use Apie\Faker\Exceptions\ClassCanNotBeFakedException;
 use Apie\Faker\Fakers\CheckBaseClassFaker;
 use Apie\Faker\Fakers\DateValueObjectFaker;
 use Apie\Faker\Fakers\EnumFaker;
+use Apie\Faker\Fakers\ItemHashmapFaker;
 use Apie\Faker\Fakers\ItemListFaker;
 use Apie\Faker\Fakers\PasswordValueObjectFaker;
 use Apie\Faker\Fakers\PolymorphicEntityFaker;
@@ -14,6 +15,7 @@ use Apie\Faker\Fakers\StringValueObjectWithRegexFaker;
 use Apie\Faker\Fakers\UseConstructorFaker;
 use Apie\Faker\Fakers\UseFakeMethodFaker;
 use Apie\Faker\Interfaces\ApieClassFaker;
+use Apie\TypeConverter\ReflectionTypeFactory;
 use Faker\Generator;
 use Faker\Provider\Base;
 use ReflectionClass;
@@ -52,6 +54,7 @@ final class ApieObjectFaker extends Base
             new CheckBaseClassFaker(new ReflectionClass(IdentifierInterface::class)),
             new PolymorphicEntityFaker(),
             new ItemListFaker(),
+            new ItemHashmapFaker(),
             new PasswordValueObjectFaker(),
             new DateValueObjectFaker(),
             new StringValueObjectWithRegexFaker(),
@@ -100,11 +103,16 @@ final class ApieObjectFaker extends Base
 
         return $arguments;
     }
+
+    public function fakeMixed(): mixed
+    {
+        return $this->fakeFromType(ReflectionTypeFactory::createReflectionType('array|null|bool|float|string|int'));
+    }
     
     public function fakeFromType(?ReflectionType $typehint): mixed
     {
         if ($typehint === null) {
-            return null;
+            return $this->fakeMixed();
         }
         if ($typehint instanceof ReflectionIntersectionType) {
             throw new InvalidTypeException($typehint, 'ReflectionUnionType|ReflectionNamedType');
@@ -115,13 +123,19 @@ final class ApieObjectFaker extends Base
             return $this->generator;
         }
         return match ($type->getName()) {
-            'array' => [],
+            'array' => [
+                $this->generator->word() => $this->generator->fakeMixed(),
+                $this->generator->word() => $this->generator->fakeMixed(),
+                $this->generator->word() => $this->generator->fakeMixed(),
+            ],
             'null' => null,
+            'false' => false,
+            'true' => true,
             'bool' => $this->generator->randomElement([true, false]),
             'float' => $this->generator->randomFloat(),
-            'string' => $this->generator->randomAscii(),
+            'string' => $this->generator->word(),
             'int' => $this->generator->numberBetween(PHP_INT_MIN, PHP_INT_MAX),
-            'mixed' => null,
+            'mixed' => $this->fakeMixed(),
             default => $this->fakeClass($type->getName()),
         };
     }
