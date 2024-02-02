@@ -111,7 +111,7 @@ class ApieObjectFakerTest extends TestCase
         for ($i = 0; $i < 100; $i++) {
             $result = $faker->fakeFromType(ReflectionTypeFactory::createReflectionType($type));
             switch ($type) {
-                case 'true': 
+                case 'true':
                     $this->assertTrue($result);
                     break;
                 case 'false':
