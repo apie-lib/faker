@@ -122,6 +122,11 @@ final class ApieObjectFaker extends Base
         if ($type->getName() === Generator::class) {
             return $this->generator;
         }
+        if ($type->allowsNull()) {
+            if ($this->generator->boolean()) {
+                return null;
+            }
+        }
         return match ($type->getName()) {
             'array' => [
                 $this->generator->word() => $this->generator->fakeMixed(),
@@ -134,7 +139,7 @@ final class ApieObjectFaker extends Base
             'bool' => $this->generator->randomElement([true, false]),
             'float' => $this->generator->randomFloat(),
             'string' => $this->generator->word(),
-            'int' => $this->generator->numberBetween(PHP_INT_MIN, PHP_INT_MAX),
+            'int' => $this->generator->numberBetween(-2147483648, 2147483647), // compatible with integers in Mysql
             'mixed' => $this->fakeMixed(),
             default => $this->fakeClass($type->getName()),
         };
