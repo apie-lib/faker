@@ -10,6 +10,7 @@ use Apie\Faker\Fakers\EnumFaker;
 use Apie\Faker\Fakers\ItemHashmapFaker;
 use Apie\Faker\Fakers\ItemListFaker;
 use Apie\Faker\Fakers\PasswordValueObjectFaker;
+use Apie\Faker\Fakers\PhpDateTimeObjectFaker;
 use Apie\Faker\Fakers\PolymorphicEntityFaker;
 use Apie\Faker\Fakers\StringValueObjectWithRegexFaker;
 use Apie\Faker\Fakers\UseConstructorFaker;
@@ -59,6 +60,7 @@ final class ApieObjectFaker extends Base
             new DateValueObjectFaker(),
             new StringValueObjectWithRegexFaker(),
             new EnumFaker(),
+            new PhpDateTimeObjectFaker(),
             new UseConstructorFaker(),
             ...$additional
         );
