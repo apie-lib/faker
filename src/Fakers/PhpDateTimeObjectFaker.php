@@ -1,10 +1,8 @@
 <?php
 namespace Apie\Faker\Fakers;
 
-use Apie\Core\ValueObjects\Interfaces\TimeRelatedValueObjectInterface;
 use Apie\Faker\Interfaces\ApieClassFaker;
 use DateTime;
-use DateTimeImmutable;
 use DateTimeInterface;
 use Faker\Generator;
 use ReflectionClass;
