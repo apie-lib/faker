@@ -51,18 +51,20 @@ final class ApieObjectFaker extends Base
     {
         return new self(
             $generator,
-            new UseFakeMethodFaker(),
-            new CheckBaseClassFaker(new ReflectionClass(IdentifierInterface::class)),
-            new PolymorphicEntityFaker(),
-            new ItemListFaker(),
-            new ItemHashmapFaker(),
-            new PasswordValueObjectFaker(),
-            new DateValueObjectFaker(),
-            new StringValueObjectWithRegexFaker(),
-            new EnumFaker(),
-            new PhpDateTimeObjectFaker(),
-            new UseConstructorFaker(),
-            ...$additional
+            ...[
+                ...$additional,
+                new UseFakeMethodFaker(),
+                new CheckBaseClassFaker(new ReflectionClass(IdentifierInterface::class)),
+                new PolymorphicEntityFaker(),
+                new ItemListFaker(),
+                new ItemHashmapFaker(),
+                new PasswordValueObjectFaker(),
+                new DateValueObjectFaker(),
+                new StringValueObjectWithRegexFaker(),
+                new EnumFaker(),
+                new PhpDateTimeObjectFaker(),
+                new UseConstructorFaker(),
+            ]
         );
     }
 
@@ -110,7 +112,7 @@ final class ApieObjectFaker extends Base
     {
         return $this->fakeFromType(ReflectionTypeFactory::createReflectionType('array|null|bool|float|string|int'));
     }
-    
+
     public function fakeFromType(?ReflectionType $typehint): mixed
     {
         if ($typehint === null) {

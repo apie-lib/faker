@@ -9,6 +9,7 @@ use Apie\Faker\Interfaces\ApieClassFaker;
 use Faker\Generator;
 use LogicException;
 use ReflectionClass;
+use RuntimeException;
 
 /**
  * @implements ApieClassFaker<IdentifierInterface>
@@ -25,6 +26,8 @@ final class ApieResourceSeeder implements ApieClassFaker
      */
     private array $idsCreated = [];
 
+    private bool $building = false;
+
     public function __construct(
         private readonly BoundedContextEntityTuple $contextAndClass,
         private readonly int $amount
@@ -37,7 +40,7 @@ final class ApieResourceSeeder implements ApieClassFaker
      */
     public function supports(ReflectionClass $class): bool
     {
-        if (!$class->implementsInterface(IdentifierInterface::class)) {
+        if ($this->building || !$class->implementsInterface(IdentifierInterface::class)) {
             return false;
         }
         $intendedClass = $class->getMethod('getReferenceFor')->invoke(null);
@@ -64,25 +67,31 @@ final class ApieResourceSeeder implements ApieClassFaker
         }
         if (!isset($this->createdResources[$index])) {
             $retries = 0;
-            do {
-                $fakedResource = $generator->fakeClass($this->contextAndClass->resourceClass->name);
-                $id = $fakedResource->getId()->toNative();
-                $retries++;
-            } while ($id !== null && isset($this->idsCreated[$id]) && $retries < 1000);
-            if ($id !== null && isset($this->idsCreated[$id])) {
-                throw new LogicException(
-                    sprintf(
-                        'I tried to create a unique resource, but it failed for 1000 times on class "%s"!',
-                        $this->contextAndClass->resourceClass->name
-                    )
-                );
+            $this->building = true;
+            try {
+                do {
+                    $fakedResource = $generator->fakeClass($this->contextAndClass->resourceClass->name);
+                    $id = $fakedResource->getId()->toNative();
+                    $retries++;
+                } while ($id !== null && isset($this->idsCreated[$id]) && $retries < 1000);
+                if ($id !== null && isset($this->idsCreated[$id])) {
+                    throw new LogicException(
+                        sprintf(
+                            'I tried to create a unique resource, but it failed for 1000 times on class "%s"!',
+                            $this->contextAndClass->resourceClass->name
+                        )
+                    );
+                }
+                $this->idsCreated[$id] = true;
+                $this->createdResources[$index] = $fakedResource;
+            } finally {
+                $this->building = false;
             }
-            $this->idsCreated[$id] = true;
-            $this->createdResources[$index] = $fakedResource;
         }
 
         return $this->createdResources[$index];
     }
+
     /**
      * @template T of IdentifierInterface<EntityInterface>
      * @param ReflectionClass<T> $class
@@ -90,7 +99,6 @@ final class ApieResourceSeeder implements ApieClassFaker
      */
     public function fakeFor(Generator $generator, ReflectionClass $class): IdentifierInterface
     {
-        return $this->getResource($generator, $generator->numberBetween(0, $this->amount))->getId();
-        
+        return $this->getResource($generator, $generator->numberBetween(0, $this->amount - 1))->getId();
     }
 }
