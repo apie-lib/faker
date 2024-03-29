@@ -9,7 +9,6 @@ use Apie\Faker\Interfaces\ApieClassFaker;
 use Faker\Generator;
 use LogicException;
 use ReflectionClass;
-use RuntimeException;
 
 /**
  * @implements ApieClassFaker<IdentifierInterface>
