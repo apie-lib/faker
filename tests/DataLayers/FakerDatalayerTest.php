@@ -4,12 +4,12 @@ namespace Apie\Tests\Faker;
 use Apie\Core\Datalayers\Search\LazyLoadedListFilterer;
 use Apie\Core\Datalayers\Search\QuerySearch;
 use Apie\Core\Indexing\Indexer;
+use Apie\Core\ValueObjects\DatabaseText;
 use Apie\Faker\Datalayers\FakerDatalayer;
 use Apie\Fixtures\Entities\UserWithAutoincrementKey;
 use Apie\Fixtures\Identifiers\UserAutoincrementIdentifier;
 use Apie\Fixtures\ValueObjects\AddressWithZipcodeCheck;
 use Apie\Tests\Faker\Concerns\ItCreatesAFaker;
-use Apie\TextValueObjects\DatabaseText;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
