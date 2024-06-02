@@ -18,7 +18,7 @@ class PhpDateTimeObjectFaker implements ApieClassFaker
     public function fakeFor(Generator $generator, ReflectionClass $class): DateTimeInterface
     {
         $className = $class->name;
-        return match($className) {
+        return match ($className) {
             DateTimeInterface::class => new DateTime('@' . $generator->unixTime()),
             default => new $className('@' . $generator->unixTime()),
         };

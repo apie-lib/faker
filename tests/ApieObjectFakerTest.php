@@ -125,7 +125,6 @@ class ApieObjectFakerTest extends TestCase
                 default:
                     $this->assertEquals($type, get_debug_type($result));
             }
-            
         }
     }
 

@@ -24,7 +24,7 @@
     "apie/core": "self.version",
     "fakerphp/faker": "^1.19",
     "niklongstone/regex-reverse": "^0.4.0|^0.5.0",
-    "symfony/console": "6.*"
+    "symfony/console": "^6.4"
   },
   "require-dev": {
     "apie/common-value-objects": "self.version",
@@ -35,7 +35,7 @@
     "illuminate/support": "*",
     "phpunit/phpunit": "^9.5",
     "phpspec/prophecy-phpunit": "^2.0",
-    "symfony/finder": "6.*"
+    "symfony/finder": "^6.4"
   },
   "minimum-stability": "dev",
   "prefer-stable": true
