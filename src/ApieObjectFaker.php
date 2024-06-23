@@ -14,6 +14,7 @@ use Apie\Faker\Fakers\PasswordValueObjectFaker;
 use Apie\Faker\Fakers\PhpDateTimeObjectFaker;
 use Apie\Faker\Fakers\PolymorphicEntityFaker;
 use Apie\Faker\Fakers\StringValueObjectWithRegexFaker;
+use Apie\Faker\Fakers\UploadedFileFaker;
 use Apie\Faker\Fakers\UseConstructorFaker;
 use Apie\Faker\Fakers\UseFakeMethodFaker;
 use Apie\Faker\Interfaces\ApieClassFaker;
@@ -56,6 +57,7 @@ final class ApieObjectFaker extends Base
                 ...$additional,
                 new UseFakeMethodFaker(),
                 new CheckBaseClassFaker(new ReflectionClass(IdentifierInterface::class)),
+                new UploadedFileFaker(),
                 new PolymorphicEntityFaker(),
                 new ItemListFaker(),
                 new ItemHashmapFaker(),
