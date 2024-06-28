@@ -21,6 +21,7 @@ class FakerServiceProvider extends ServiceProvider
                     'Apie\\Common\\Wrappers\\GeneralServiceFactory::createFaker',
                     $this->getTaggedServicesIterator('apie.faker')
                 );
+                
             }
         );
         $this->app->singleton(
@@ -58,5 +59,7 @@ class FakerServiceProvider extends ServiceProvider
         );
         $this->app->tag([\Apie\Faker\Datalayers\FakerDatalayer::class], 'apie.datalayer');
         $this->app->bind('apie.faker', \Faker\Generator::class);
+        
+        
     }
 }
