@@ -25,7 +25,7 @@ class ApieSeedCommand extends Command
 
     protected function configure(): void
     {
-        $this->addOption('amount', 'a', InputOption::VALUE_REQUIRED, description: 'How many objects should be created', default: 100);
+        $this->addOption('amount', 'a', InputOption::VALUE_REQUIRED, description: 'How many objects should be created', default: 10);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
