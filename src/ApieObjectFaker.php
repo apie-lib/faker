@@ -13,6 +13,7 @@ use Apie\Faker\Fakers\ItemSetFaker;
 use Apie\Faker\Fakers\PasswordValueObjectFaker;
 use Apie\Faker\Fakers\PhpDateTimeObjectFaker;
 use Apie\Faker\Fakers\PolymorphicEntityFaker;
+use Apie\Faker\Fakers\StringableFaker;
 use Apie\Faker\Fakers\StringValueObjectWithRegexFaker;
 use Apie\Faker\Fakers\UploadedFileFaker;
 use Apie\Faker\Fakers\UseConstructorFaker;
@@ -67,6 +68,7 @@ final class ApieObjectFaker extends Base
                 new StringValueObjectWithRegexFaker(),
                 new EnumFaker(),
                 new PhpDateTimeObjectFaker(),
+                new StringableFaker(),
                 new UseConstructorFaker(),
             ]
         );

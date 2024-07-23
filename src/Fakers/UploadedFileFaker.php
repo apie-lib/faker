@@ -12,16 +12,8 @@ class UploadedFileFaker implements ApieClassFaker
 {
     public function supports(ReflectionClass $class): bool
     {
-        if (in_array($class->name, [UploadedFileInterface::class, StoredFile::class])) {
-            return true;
-        }
-        while ($class) {
-            if ($class->name === StoredFile::class) {
-                return true;
-            }
-            $class = $class->getParentClass();
-        }
-        return false;
+        return UploadedFileInterface::class === $class->name
+            || in_array(UploadedFileInterface::class, $class->getInterfaceNames());
     }
 
     public function fakeFor(Generator $generator, ReflectionClass $class): UploadedFileInterface
