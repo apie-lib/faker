@@ -6,7 +6,7 @@
 
 
 
- [![Latest Stable Version](http://poser.pugx.org/apie/faker/v)](https://packagist.org/packages/apie/faker) [![Total Downloads](http://poser.pugx.org/apie/faker/downloads)](https://packagist.org/packages/apie/faker) [![Latest Unstable Version](http://poser.pugx.org/apie/faker/v/unstable)](https://packagist.org/packages/apie/faker) [![License](http://poser.pugx.org/apie/faker/license)](https://packagist.org/packages/apie/faker) [![PHP Composer](https://apie-lib.github.io/projectCoverage/coverage-faker.svg)](https://apie-lib.github.io/projectCoverage/app/packages/faker/index.html)  
+ [![Latest Stable Version](https://poser.pugx.org/apie/faker/v)](https://packagist.org/packages/apie/faker) [![Total Downloads](https://poser.pugx.org/apie/faker/downloads)](https://packagist.org/packages/apie/faker) [![Latest Unstable Version](https://poser.pugx.org/apie/faker/v/unstable)](https://packagist.org/packages/apie/faker) [![License](https://poser.pugx.org/apie/faker/license)](https://packagist.org/packages/apie/faker) [![PHP Composer](https://apie-lib.github.io/projectCoverage/coverage-faker.svg)](https://apie-lib.github.io/projectCoverage/faker/index.html)  
 
 [![PHP Composer](https://github.com/apie-lib/faker/actions/workflows/php.yml/badge.svg?event=push)](https://github.com/apie-lib/faker/actions/workflows/php.yml)
 
