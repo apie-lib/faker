@@ -34,7 +34,7 @@ final class FakeEntityList implements EntityListInterface
     {
         $attributes = $this->class->getAttributes(FakeCount::class);
         if (empty($attributes)) {
-            return 100;
+            return 10;
         }
         return reset($attributes)->newInstance()->count;
     }
