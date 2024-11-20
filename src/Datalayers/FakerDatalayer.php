@@ -1,10 +1,8 @@
 <?php
 namespace Apie\Faker\Datalayers;
 
-use Apie\Core\BoundedContext\BoundedContext;
 use Apie\Core\BoundedContext\BoundedContextId;
 use Apie\Core\Datalayers\ApieDatalayerWithFilters;
-use Apie\Core\Datalayers\BoundedContextAwareApieDatalayer;
 use Apie\Core\Datalayers\Concerns\FiltersOnAllFields;
 use Apie\Core\Datalayers\Lists\EntityListInterface;
 use Apie\Core\Datalayers\Search\LazyLoadedListFilterer;
@@ -15,7 +13,7 @@ use Apie\Core\IdentifierUtils;
 use Faker\Generator;
 use ReflectionClass;
 
-class FakerDatalayer implements ApieDatalayerWithFilters, BoundedContextAwareApieDatalayer
+class FakerDatalayer implements ApieDatalayerWithFilters
 {
     use FiltersOnAllFields;
 
@@ -23,17 +21,17 @@ class FakerDatalayer implements ApieDatalayerWithFilters, BoundedContextAwareApi
     {
     }
 
-    public function all(ReflectionClass $class, ?BoundedContext $boundedContext = null): EntityListInterface
+    public function all(ReflectionClass $class, ?BoundedContextId $boundedContextId = null): EntityListInterface
     {
         return new FakeEntityList(
             $class,
-            $boundedContext ? $boundedContext->getId() : new BoundedContextId('unknown'),
+            $boundedContextId ?? new BoundedContextId('unknown'),
             $this->filterer,
             $this->faker
         );
     }
 
-    public function find(IdentifierInterface $identifier, ?BoundedContext $boundedContext = null): EntityInterface
+    public function find(IdentifierInterface $identifier, ?BoundedContextId $boundedContextId = null): EntityInterface
     {
         $class = IdentifierUtils::identifierToEntityClass($identifier);
         $object = $this->faker->fakeClass($class->name);
@@ -41,7 +39,7 @@ class FakerDatalayer implements ApieDatalayerWithFilters, BoundedContextAwareApi
         return $object;
     }
 
-    public function persistNew(EntityInterface $entity, ?BoundedContext $boundedContext = null): EntityInterface
+    public function persistNew(EntityInterface $entity, ?BoundedContextId $boundedContextId = null): EntityInterface
     {
         $identifier = $entity->getId();
         if ($identifier instanceof AutoIncrementInteger) {
@@ -51,12 +49,12 @@ class FakerDatalayer implements ApieDatalayerWithFilters, BoundedContextAwareApi
         return $entity;
     }
 
-    public function persistExisting(EntityInterface $entity, ?BoundedContext $boundedContext = null): EntityInterface
+    public function persistExisting(EntityInterface $entity, ?BoundedContextId $boundedContextId = null): EntityInterface
     {
         return $entity;
     }
 
-    public function removeExisting(EntityInterface $entity, ?BoundedContext $boundedContext = null): void
+    public function removeExisting(EntityInterface $entity, ?BoundedContextId $boundedContextId = null): void
     {
     }
 }
