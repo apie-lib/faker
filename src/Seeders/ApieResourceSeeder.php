@@ -4,6 +4,7 @@ namespace Apie\Faker\Seeders;
 use Apie\Core\Actions\BoundedContextEntityTuple;
 use Apie\Core\BoundedContext\BoundedContextId;
 use Apie\Core\Entities\EntityInterface;
+use Apie\Core\Exceptions\InvalidTypeException;
 use Apie\Core\Identifiers\IdentifierInterface;
 use Apie\Faker\Interfaces\ApieClassFaker;
 use Faker\Generator;
@@ -98,6 +99,15 @@ final class ApieResourceSeeder implements ApieClassFaker
      */
     public function fakeFor(Generator $generator, ReflectionClass $class): IdentifierInterface
     {
-        return $this->getResource($generator, $generator->numberBetween(0, $this->amount - 1))->getId();
+        $randomNumber = $generator->numberBetween(0, $this->amount - 1);
+        $resource = $this->getResource($generator, $randomNumber);
+        if (!$resource instanceof EntityInterface) {
+            throw new InvalidTypeException(
+                $resource,
+                'EntityInterface',
+                new \Exception('Random number: ' . $randomNumber)
+            );
+        }
+        return $resource->getId();
     }
 }

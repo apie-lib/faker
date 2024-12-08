@@ -38,10 +38,12 @@ class ApieSeedCommand extends Command
             foreach ($attributes as $attribute) {
                 $counter = $attribute->newInstance()->count;
             }
-            $seeders[] = new ApieResourceSeeder(
-                $tuple,
-                $counter
-            );
+            if ($counter > 0) {
+                $seeders[] = new ApieResourceSeeder(
+                    $tuple,
+                    $counter
+                );
+            }
         }
         $generator = GeneralServiceFactory::createFaker($seeders);
         foreach ($seeders as $seeder) {
