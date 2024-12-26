@@ -17,9 +17,7 @@ class FakerDatalayerTest extends TestCase
 {
     use ItCreatesAFaker;
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_retrieves_random_data()
     {
         $faker = $this->givenAFakerWithApieObjectFaker();
@@ -32,9 +30,7 @@ class FakerDatalayerTest extends TestCase
         $this->assertCount(1, $actual->list, 'Faker respects the total count when last page should not be complete');
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_finds_one_line_of_random_data()
     {
         $faker = $this->givenAFakerWithApieObjectFaker();
@@ -44,9 +40,7 @@ class FakerDatalayerTest extends TestCase
         $this->assertEquals(12, $actual->getId()->toNative());
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_persists_only_an_autoincrement_integer()
     {
         $faker = $this->givenAFakerWithApieObjectFaker();

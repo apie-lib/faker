@@ -20,10 +20,8 @@ class ApieObjectFakerTest extends TestCase
 {
     use ItCreatesAFaker;
 
-    /**
-     * @test
-     * @dataProvider dateValueObjectsProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('dateValueObjectsProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_fake_a_date_value_object(string $classToTest)
     {
         $faker = $this->givenAFakerWithApieObjectFaker();
@@ -36,7 +34,7 @@ class ApieObjectFakerTest extends TestCase
         }
     }
 
-    public function dateValueObjectsProvider(): iterable
+    public static function dateValueObjectsProvider(): iterable
     {
         $path = dirname((new ReflectionClass(Time::class))->getFileName());
         foreach (Finder::create()->files()->name('*.php')->depth(0)->in($path) as $file) {
@@ -45,10 +43,8 @@ class ApieObjectFakerTest extends TestCase
         }
     }
 
-    /**
-     * @test
-     * @dataProvider compositeValueObjectProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('compositeValueObjectProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_fake_composite_value_objects(string $classToTest)
     {
         $faker = $this->givenAFakerWithApieObjectFaker();
@@ -58,17 +54,15 @@ class ApieObjectFakerTest extends TestCase
         }
     }
 
-    public function compositeValueObjectProvider(): iterable
+    public static function compositeValueObjectProvider(): iterable
     {
         yield 'Entity with autoincrement identifier' => [UserWithAutoincrementKey::class];
         yield 'Entity with uuid identifier' => [UserWithAddress::class];
         yield 'Polymorphic entity' => [Animal::class];
     }
 
-    /**
-     * @test
-     * @dataProvider enumProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('enumProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_fake_an_enum(string $classToTest)
     {
         $faker = $this->givenAFakerWithApieObjectFaker();
@@ -78,15 +72,13 @@ class ApieObjectFakerTest extends TestCase
         }
     }
 
-    public function enumProvider()
+    public static function enumProvider()
     {
         yield 'regular enum' => [Gender::class];
     }
 
-    /**
-     * @test
-     * @dataProvider passwordValueObjectsProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('passwordValueObjectsProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_fake_a_password_value_object(string $classToTest)
     {
         $faker = $this->givenAFakerWithApieObjectFaker();
@@ -96,15 +88,13 @@ class ApieObjectFakerTest extends TestCase
         }
     }
 
-    public function passwordValueObjectsProvider(): iterable
+    public static function passwordValueObjectsProvider(): iterable
     {
         yield 'regular password' => [Password::class];
     }
 
-    /**
-     * @test
-     * @dataProvider primitiveProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('primitiveProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_fake_primitives(string $type)
     {
         $faker = $this->givenAFakerWithApieObjectFaker();
@@ -128,12 +118,9 @@ class ApieObjectFakerTest extends TestCase
         }
     }
 
-    public function primitiveProvider(): iterable
+    public static function primitiveProvider(): iterable
     {
-        $types = ['string', 'int', 'float', 'false', 'bool', 'mixed', 'array', stdClass::class];
-        if (PHP_VERSION_ID >= 80200) {
-            $types[] =  'true';
-        }
+        $types = ['string', 'int', 'float', 'false', 'true', 'bool', 'mixed', 'array', stdClass::class];
         foreach ($types as $type) {
             yield $type => [$type];
         }

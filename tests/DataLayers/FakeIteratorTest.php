@@ -11,9 +11,7 @@ class FakeIteratorTest extends TestCase
 {
     use ItCreatesAFaker;
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_virtual_list_of_items()
     {
         $testItem = new FakeIterator(11, new ReflectionClass(UserWithAddress::class), $this->givenAFakerWithApieObjectFaker());

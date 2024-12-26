@@ -2,7 +2,7 @@ services:
   Faker\Generator:
     factory: Apie\Common\Wrappers\GeneralServiceFactory::createFaker
     arguments:
-      - !tagged apie.faker
+      - !tagged_iterator apie.faker
   
   Apie\Faker\Command\ApieSeedCommand:
     arguments:
