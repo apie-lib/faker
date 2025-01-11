@@ -57,4 +57,9 @@ class FakerDatalayer implements ApieDatalayerWithFilters
     public function removeExisting(EntityInterface $entity, ?BoundedContextId $boundedContextId = null): void
     {
     }
+
+    public function upsert(EntityInterface $entity, ?BoundedContextId $boundedContextId): EntityInterface
+    {
+        return $this->persistNew($entity, $boundedContextId);
+    }
 }
