@@ -12,7 +12,7 @@ class ItemListFaker implements ApieClassFaker
 {
     public function supports(ReflectionClass $class): bool
     {
-        return $class->isSubclassOf(ItemList::class);
+        return $class->isSubclassOf(ItemList::class) || $class->name === ItemList::class;
     }
 
     public function fakeFor(Generator $generator, ReflectionClass $class): object

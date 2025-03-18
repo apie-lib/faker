@@ -11,6 +11,6 @@ class ClassCanNotBeFakedException extends ApieException
      */
     public function __construct(ReflectionClass $class)
     {
-        parent::__construct(sprintf('Class "%s" can not faked!', $class->name));
+        parent::__construct(sprintf('Class "%s" can not be faked!', $class->name));
     }
 }

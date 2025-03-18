@@ -17,5 +17,5 @@ interface ApieClassFaker
      * @param ReflectionClass<T> $class
      * @return T
      */
-    public function fakeFor(Generator $generator, ReflectionClass $class): object;
+    public function fakeFor(Generator $generator, ReflectionClass $class): mixed;
 }

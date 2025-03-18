@@ -1,0 +1,23 @@
+services:
+  Faker\Generator:
+    factory: Apie\Common\Wrappers\GeneralServiceFactory::createFaker
+    arguments:
+      - !tagged_iterator apie.faker
+  
+  Apie\Faker\Command\ApieSeedCommand:
+    arguments:
+      - '@Apie\Core\BoundedContext\BoundedContextHashmap'
+      - '@apie'
+    tags:
+      - 'console.command'
+
+  Apie\Faker\Datalayers\FakerDatalayer:
+    arguments:
+      - '@Faker\Generator'
+      - '@Apie\Core\Datalayers\Search\LazyLoadedListFilterer'
+    tags:
+      - 'apie.datalayer'
+
+  apie.faker:
+    public: true
+    alias: Faker\Generator

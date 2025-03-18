@@ -20,19 +20,24 @@
     }
   },
   "require": {
-    "php": ">=8.1",
+    "php": ">=8.3",
     "apie/core": "self.version",
-    "fakerphp/faker": "^1.19",
-    "niklongstone/regex-reverse": "^0.4.0"
+    "fakerphp/faker": "^1.23.1",
+    "guzzlehttp/psr7": "^2.4",
+    "maennchen/zipstream-php": "^3.0",
+    "niklongstone/regex-reverse": "^0.4.0|^0.5.0",
+    "symfony/console": "^7.2"
   },
   "require-dev": {
     "apie/common-value-objects": "self.version",
     "apie/date-value-objects": "self.version",
     "apie/fixtures": "self.version",
+    "apie/service-provider-generator": "0.11.3",
     "apie/text-value-objects": "self.version",
-    "phpunit/phpunit": "^9.5",
-    "phpspec/prophecy-phpunit": "^2.0",
-    "symfony/finder": "6.*"
+    "illuminate/support": "*",
+    "phpunit/phpunit": "^11.5.2",
+    "phpspec/prophecy-phpunit": "^2.2",
+    "symfony/finder": "^7.2"
   },
   "minimum-stability": "dev",
   "prefer-stable": true

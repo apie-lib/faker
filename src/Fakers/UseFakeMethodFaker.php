@@ -18,9 +18,22 @@ class UseFakeMethodFaker implements ApieClassFaker
     }
     public function fakeFor(Generator $generator, ReflectionClass $class): object
     {
+        return self::runFake($generator, $class, $class->getAttributes(FakeMethod::class));
+    }
+
+    /**
+     * @internal Used by CheckBaseClassFaker and UseFakeMethodFaker
+     *
+     * @template T of object
+     * @param ReflectionClass<T> $class
+     * @param array<int, ReflectionAttribute<FakeMethod>> $attributes
+     */
+    public static function runFake(Generator $generator, ReflectionClass $class, array $attributes): object
+    {
         /** @var ReflectionAttribute<FakeMethod> $fakeMethod */
-        $fakeMethod = $generator->randomElement($class->getAttributes(FakeMethod::class));
-        $method = $class->getMethod($fakeMethod->newInstance()->methodName);
+        $fakeMethod = $generator->randomElement($attributes);
+        $methodName = $fakeMethod->newInstance()->methodName;
+        $method = $class->getMethod($methodName);
         if (!$method->isStatic()) {
             throw new MethodIsNotStaticException($method);
         }
@@ -38,7 +51,9 @@ class UseFakeMethodFaker implements ApieClassFaker
                 $arguments[] = $generator->fakeFromType($type);
             }
         }
-        $object = $method->invokeArgs(null, $arguments);
+        // can not call ReflectionMethod::invokeArgs because of late static binding
+        $className = $class->name;
+        $object = $className::$methodName(...$arguments);
         if (!$class->isInstance($object)) {
             throw new InvalidTypeException($object, $class->name);
         }
