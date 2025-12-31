@@ -1,5 +1,5 @@
 <?php
-namespace Apie\Tests\Faker;
+namespace Apie\Tests\Faker\DataLayers;
 
 use Apie\Core\Datalayers\Search\LazyLoadedListFilterer;
 use Apie\Core\Datalayers\Search\QuerySearch;
