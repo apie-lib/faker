@@ -14,7 +14,7 @@ class FakerServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->singleton(
+        $this->registerSingleton(
             \Faker\Generator::class,
             function ($app) {
                 return call_user_func(
@@ -24,7 +24,7 @@ class FakerServiceProvider extends ServiceProvider
                 
             }
         );
-        $this->app->singleton(
+        $this->registerSingleton(
             \Apie\Faker\Command\ApieSeedCommand::class,
             function ($app) {
                 return new \Apie\Faker\Command\ApieSeedCommand(
@@ -41,7 +41,7 @@ class FakerServiceProvider extends ServiceProvider
             )
         );
         $this->app->tag([\Apie\Faker\Command\ApieSeedCommand::class], 'console.command');
-        $this->app->singleton(
+        $this->registerSingleton(
             \Apie\Faker\Datalayers\FakerDatalayer::class,
             function ($app) {
                 return new \Apie\Faker\Datalayers\FakerDatalayer(
