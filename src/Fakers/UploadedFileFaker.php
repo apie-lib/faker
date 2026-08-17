@@ -22,7 +22,7 @@ class UploadedFileFaker implements ApieClassFaker
     }
 
     /**
-     * @param ReflectionClass<ApieFileFaker> $class
+     * @param ReflectionClass<covariant ApieFileFaker> $class
      */
     private function getApieFileFakers(Generator $generator, ReflectionClass $class): ApieFileFaker
     {
@@ -33,6 +33,7 @@ class UploadedFileFaker implements ApieClassFaker
             $class->getAttributes(FakeFile::class)
         );
         $pickedInterface = empty($interfaces) ? ApieFileFaker::class : $generator->randomElement($interfaces);
+        // @phpstan-ignore-next-line argument.templateType
         $supported = FileFakerFactory::getSupportedFileFakers($pickedInterface);
         if (empty($supported)) {
             throw new \LogicException('I have no file faker that implements ' . $pickedInterface);

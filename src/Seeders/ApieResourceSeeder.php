@@ -12,7 +12,7 @@ use LogicException;
 use ReflectionClass;
 
 /**
- * @implements ApieClassFaker<IdentifierInterface>
+ * @implements ApieClassFaker<IdentifierInterface<covariant EntityInterface>>
  */
 final class ApieResourceSeeder implements ApieClassFaker
 {
@@ -36,7 +36,7 @@ final class ApieResourceSeeder implements ApieClassFaker
     }
 
     /**
-     * @param ReflectionClass<object> $class
+     * @param ReflectionClass<covariant object> $class
      */
     public function supports(ReflectionClass $class): bool
     {
@@ -48,7 +48,7 @@ final class ApieResourceSeeder implements ApieClassFaker
     }
 
     /**
-     * @return ReflectionClass<EntityInterface>
+     * @return ReflectionClass<covariant EntityInterface>
      */
     public function getResourceClass(): ReflectionClass
     {
@@ -92,11 +92,6 @@ final class ApieResourceSeeder implements ApieClassFaker
         return $this->createdResources[$index];
     }
 
-    /**
-     * @template T of IdentifierInterface<EntityInterface>
-     * @param ReflectionClass<T> $class
-     * @return T
-     */
     public function fakeFor(Generator $generator, ReflectionClass $class): IdentifierInterface
     {
         $randomNumber = $generator->numberBetween(0, $this->amount - 1);

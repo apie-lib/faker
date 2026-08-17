@@ -7,7 +7,7 @@ use ReflectionClass;
 class ClassCanNotBeFakedException extends ApieException
 {
     /**
-     * @param ReflectionClass<object> $class
+     * @param ReflectionClass<covariant object> $class
      */
     public function __construct(ReflectionClass $class)
     {

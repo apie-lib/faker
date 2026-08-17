@@ -7,6 +7,7 @@ use Apie\Faker\Exceptions\ClassCanNotBeFakedException;
 use Apie\Faker\Fakers\CheckBaseClassFaker;
 use Apie\Faker\Fakers\CompositeObjectFaker;
 use Apie\Faker\Fakers\DateValueObjectFaker;
+use Apie\Faker\Fakers\DurationFaker;
 use Apie\Faker\Fakers\EnumFaker;
 use Apie\Faker\Fakers\ItemHashmapFaker;
 use Apie\Faker\Fakers\ItemListFaker;
@@ -18,6 +19,7 @@ use Apie\Faker\Fakers\PolymorphicEntityFaker;
 use Apie\Faker\Fakers\StringableFaker;
 use Apie\Faker\Fakers\StringValueObjectWithRegexFaker;
 use Apie\Faker\Fakers\UploadedFileFaker;
+use Apie\Faker\Fakers\UriFaker;
 use Apie\Faker\Fakers\UseConstructorFaker;
 use Apie\Faker\Fakers\UseFakeMethodFaker;
 use Apie\Faker\Interfaces\ApieClassFaker;
@@ -71,6 +73,8 @@ final class ApieObjectFaker extends Base
                 new EnumFaker(),
                 new LimitedOptionsFaker(),
                 new CompositeObjectFaker(),
+                new DurationFaker(),
+                new UriFaker(),
                 new PhpDateTimeObjectFaker(),
                 new StringableFaker(),
                 new UseConstructorFaker(),

@@ -7,7 +7,7 @@ use ReflectionClass;
 
 final class FileFakerFactory
 {
-    /** @var array<class-string<ApieFileFaker>, ApieFileFaker> $instantiated */
+    /** @var array<class-string<covariant ApieFileFaker>, ApieFileFaker> $instantiated */
     private static array $instantiated = [];
 
     /**
@@ -18,7 +18,7 @@ final class FileFakerFactory
     }
 
     /**
-     * @param ReflectionClass<ApieFileFaker> $class
+     * @param ReflectionClass<covariant ApieFileFaker> $class
      */
     private static function getOrCreate(ReflectionClass $class): ApieFileFaker
     {
@@ -30,8 +30,8 @@ final class FileFakerFactory
 
     /**
      * @template T of ApieFileFaker
-     * @param class-string<T> $interface
-     * @return array<int, T>
+     * @param class-string<covariant T> $interface
+     * @return array<int, covariant T>
      */
     public static function getSupportedFileFakers(string $interface = ApieFileFaker::class): array
     {
