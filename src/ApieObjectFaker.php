@@ -4,11 +4,13 @@ namespace Apie\Faker;
 use Apie\Core\Exceptions\InvalidTypeException;
 use Apie\Core\Identifiers\IdentifierInterface;
 use Apie\Faker\Exceptions\ClassCanNotBeFakedException;
+use Apie\Faker\Fakers\BcMathFaker;
 use Apie\Faker\Fakers\CheckBaseClassFaker;
 use Apie\Faker\Fakers\CompositeObjectFaker;
 use Apie\Faker\Fakers\DateValueObjectFaker;
 use Apie\Faker\Fakers\DurationFaker;
 use Apie\Faker\Fakers\EnumFaker;
+use Apie\Faker\Fakers\GmpFaker;
 use Apie\Faker\Fakers\ItemHashmapFaker;
 use Apie\Faker\Fakers\ItemListFaker;
 use Apie\Faker\Fakers\ItemSetFaker;
@@ -75,6 +77,8 @@ final class ApieObjectFaker extends Base
                 new CompositeObjectFaker(),
                 new DurationFaker(),
                 new UriFaker(),
+                new GmpFaker(),
+                new BcMathFaker(),
                 new PhpDateTimeObjectFaker(),
                 new StringableFaker(),
                 new UseConstructorFaker(),

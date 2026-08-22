@@ -20,10 +20,10 @@
     }
   },
   "require": {
-    "php": ">=8.3",
+    "php": ">=8.4",
     "apie/core": "self.version",
-    "fakerphp/faker": "^1.23.1",
-    "guzzlehttp/psr7": "^2.4",
+    "fakerphp/faker": "^1.24.1",
+    "guzzlehttp/psr7": "^2.13",
     "maennchen/zipstream-php": "^3.2",
     "niklongstone/regex-reverse": "^0.4.0|^2.0.x-dev",
     "symfony/console": "^7.2"
@@ -36,7 +36,7 @@
     "apie/text-value-objects": "self.version",
     "illuminate/support": "*",
     "phpunit/phpunit": "^11.5.2",
-    "phpspec/prophecy-phpunit": "^2.2",
+    "phpspec/prophecy-phpunit": "^2.5",
     "symfony/finder": "^7.2"
   },
   "minimum-stability": "dev",
