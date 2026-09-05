@@ -8,8 +8,10 @@ use Apie\Faker\Fakers\BcMathFaker;
 use Apie\Faker\Fakers\CheckBaseClassFaker;
 use Apie\Faker\Fakers\CompositeObjectFaker;
 use Apie\Faker\Fakers\DateValueObjectFaker;
+use Apie\Faker\Fakers\DomFaker;
 use Apie\Faker\Fakers\DurationFaker;
 use Apie\Faker\Fakers\EnumFaker;
+use Apie\Faker\Fakers\FfiFaker;
 use Apie\Faker\Fakers\GmpFaker;
 use Apie\Faker\Fakers\ItemHashmapFaker;
 use Apie\Faker\Fakers\ItemListFaker;
@@ -18,6 +20,7 @@ use Apie\Faker\Fakers\LimitedOptionsFaker;
 use Apie\Faker\Fakers\PasswordValueObjectFaker;
 use Apie\Faker\Fakers\PhpDateTimeObjectFaker;
 use Apie\Faker\Fakers\PolymorphicEntityFaker;
+use Apie\Faker\Fakers\SimpleXmlFaker;
 use Apie\Faker\Fakers\StringableFaker;
 use Apie\Faker\Fakers\StringValueObjectWithRegexFaker;
 use Apie\Faker\Fakers\UploadedFileFaker;
@@ -76,11 +79,14 @@ final class ApieObjectFaker extends Base
                 new LimitedOptionsFaker(),
                 new CompositeObjectFaker(),
                 new DurationFaker(),
+                new DomFaker(),
                 new UriFaker(),
                 new GmpFaker(),
                 new BcMathFaker(),
                 new PhpDateTimeObjectFaker(),
                 new StringableFaker(),
+                new FfiFaker(),
+                new SimpleXmlFaker(),
                 new UseConstructorFaker(),
             ]
         );
