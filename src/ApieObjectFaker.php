@@ -6,7 +6,11 @@ use Apie\Core\Identifiers\IdentifierInterface;
 use Apie\Faker\Exceptions\ClassCanNotBeFakedException;
 use Apie\Faker\Fakers\BcMathFaker;
 use Apie\Faker\Fakers\CheckBaseClassFaker;
+use Apie\Faker\Fakers\ClosureFaker;
 use Apie\Faker\Fakers\CompositeObjectFaker;
+use Apie\Faker\Fakers\DateIntervalFaker;
+use Apie\Faker\Fakers\DatePeriodFaker;
+use Apie\Faker\Fakers\DateTimeZoneFaker;
 use Apie\Faker\Fakers\DateValueObjectFaker;
 use Apie\Faker\Fakers\DomFaker;
 use Apie\Faker\Fakers\DurationFaker;
@@ -84,9 +88,13 @@ final class ApieObjectFaker extends Base
                 new GmpFaker(),
                 new BcMathFaker(),
                 new PhpDateTimeObjectFaker(),
+                new DatePeriodFaker(),
+                new DateTimeZoneFaker(),
+                new DateIntervalFaker(),
                 new StringableFaker(),
                 new FfiFaker(),
                 new SimpleXmlFaker(),
+                new ClosureFaker(),
                 new UseConstructorFaker(),
             ]
         );
