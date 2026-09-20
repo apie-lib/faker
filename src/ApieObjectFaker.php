@@ -17,6 +17,7 @@ use Apie\Faker\Fakers\DurationFaker;
 use Apie\Faker\Fakers\EnumFaker;
 use Apie\Faker\Fakers\FfiFaker;
 use Apie\Faker\Fakers\GmpFaker;
+use Apie\Faker\Fakers\InterfaceFaker;
 use Apie\Faker\Fakers\ItemHashmapFaker;
 use Apie\Faker\Fakers\ItemListFaker;
 use Apie\Faker\Fakers\ItemSetFaker;
@@ -95,6 +96,7 @@ final class ApieObjectFaker extends Base
                 new FfiFaker(),
                 new SimpleXmlFaker(),
                 new ClosureFaker(),
+                new InterfaceFaker(),
                 new UseConstructorFaker(),
             ]
         );
