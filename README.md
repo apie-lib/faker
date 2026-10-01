@@ -16,6 +16,12 @@ The code is maintained in a monorepo, so PR's need to be sent to the [monorepo](
 ## Documentation
 This package adds a method to the library [Faker](https://github.com/FakerPHP/Faker) to fake domain object and value object contents.
 
+### Standalone usage
+Install it with:
+```bash
+composer require apie/faker
+```
+
 Because of the recursive nature this is the easiest setup:
 ```php
 <?php
@@ -101,3 +107,9 @@ class SpecificClass implements ValueObjectInterface
 }
 ```
 In this case calling $faker->fakeClass(SpecificClass::class); will run SpecificClass::createRandom() with the faker and a random integer.
+
+### Symfony integration
+Via `apie/apie-bundle`, `faker.yaml` is loaded automatically and registers `Faker\Generator` (collecting all services tagged `apie.faker`), the `apie.faker` alias, the `ApieSeedCommand` console command, and `FakerDatalayer`, which fakes an in-memory datalayer for a bounded context.
+
+### Laravel integration
+Via `apie/laravel-apie`, the generated `Apie\Faker\FakerServiceProvider` is auto-registered and wires the same `Faker\Generator`, seed command, and fake datalayer into the Laravel container.

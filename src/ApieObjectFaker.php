@@ -25,6 +25,7 @@ use Apie\Faker\Fakers\LimitedOptionsFaker;
 use Apie\Faker\Fakers\PasswordValueObjectFaker;
 use Apie\Faker\Fakers\PhpDateTimeObjectFaker;
 use Apie\Faker\Fakers\PolymorphicEntityFaker;
+use Apie\Faker\Fakers\ReflectionFaker;
 use Apie\Faker\Fakers\SimpleXmlFaker;
 use Apie\Faker\Fakers\StringableFaker;
 use Apie\Faker\Fakers\StringValueObjectWithRegexFaker;
@@ -41,6 +42,7 @@ use ReflectionIntersectionType;
 use ReflectionMethod;
 use ReflectionType;
 use ReflectionUnionType;
+use stdClass;
 
 /**
  * This is a stub class
@@ -92,6 +94,7 @@ final class ApieObjectFaker extends Base
                 new DatePeriodFaker(),
                 new DateTimeZoneFaker(),
                 new DateIntervalFaker(),
+                new ReflectionFaker(),
                 new StringableFaker(),
                 new FfiFaker(),
                 new SimpleXmlFaker(),
@@ -109,6 +112,9 @@ final class ApieObjectFaker extends Base
      */
     public function fakeClass(string $className): object
     {
+        if ($className === 'object') {
+            return new stdClass();
+        }
         $refl = new ReflectionClass($className);
         foreach ($this->fakers as $faker) {
             if ($faker->supports($refl)) {
